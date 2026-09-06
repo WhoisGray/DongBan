@@ -4,6 +4,7 @@ import { categories } from '../utils/categories.js'
 import { formatAmountInput, fromMinor, parseAmount } from '../utils/money.js'
 import { useEventStore } from '../stores/eventStore.js'
 import { useToast } from '../composables/useToast.js'
+import PersianDatePicker from './PersianDatePicker.vue'
 
 const props = defineProps({ event: { type: Object, required: true }, expense: { type: Object, default: null } })
 const emit = defineEmits(['done'])
@@ -45,7 +46,7 @@ function submit() {
       <label class="field"><span>مبلغ</span><input class="money-input" :value="form.amount" inputmode="decimal" autocomplete="off" placeholder="120,000" @input="updateAmount($event.target.value)" /></label>
       <label class="field"><span>پرداخت‌کننده</span><select v-model="form.payerId"><option v-for="person in event.people" :key="person.id" :value="person.id">{{ person.name }}</option></select></label>
       <label class="field"><span>دسته‌بندی</span><select v-model="form.category"><option v-for="category in categories" :key="category.id" :value="category.id">{{ category.icon }} {{ category.label }}</option></select></label>
-      <label class="field"><span>تاریخ</span><input v-model="form.date" type="date" /></label>
+      <PersianDatePicker v-model="form.date" />
       <label class="field field--wide"><span>یادداشت (اختیاری)</span><input v-model="form.note" placeholder="جزئیات کوتاه" /></label>
     </div>
     <fieldset class="split-fieldset"><legend>مصرف‌کنندگان و ضریب سهم</legend>

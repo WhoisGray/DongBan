@@ -3,6 +3,8 @@ import { RouterView } from 'vue-router'
 import { Analytics } from '@vercel/analytics/vue'
 import AppHeader from './components/AppHeader.vue'
 import ToastStack from './components/ToastStack.vue'
+import PwaUpdatePrompt from './components/PwaUpdatePrompt.vue'
+import AppFooter from './components/AppFooter.vue'
 import { useEventStore } from './stores/eventStore.js'
 
 const store = useEventStore()
@@ -12,7 +14,9 @@ const store = useEventStore()
   <div class="app-shell" :data-theme="store.state.settings.theme">
     <AppHeader />
     <main class="main-shell"><RouterView /></main>
+    <AppFooter />
     <ToastStack />
+    <PwaUpdatePrompt />
     <Analytics />
   </div>
 </template>

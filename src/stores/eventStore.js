@@ -1,19 +1,51 @@
 import { reactive, readonly } from 'vue'
 import { createId } from '../utils/id.js'
 
-export const STORAGE_KEY = 'dongban:v2'
+export const STORAGE_KEY = 'dongban:data'
+export const CURRENT_STORAGE_VERSION = 3
+const LEGACY_STORAGE_KEYS = ['dongban:v2']
+const MIGRATION_BACKUP_KEY = 'dongban:migration-backup'
 const defaultState = () => ({
-  version: 2,
+  version: CURRENT_STORAGE_VERSION,
   settings: { theme: 'light', defaultCurrency: 'TOMAN', defaultRounding: 1 },
   savedPeople: [],
-  events: []
+  events: [],
+  meta: { migratedAt: null }
 })
 
+const migrations = {
+  2: (data) => ({
+    ...data,
+    version: 3,
+    meta: { ...(data.meta || {}), migratedAt: new Date().toISOString() }
+  })
+}
+
+export function migrateState(input) {
+  if (!input || !Number.isInteger(input.version) || !Array.isArray(input.events)) throw new Error('ساختار داده معتبر نیست.')
+  if (input.version > CURRENT_STORAGE_VERSION) throw new Error('این داده متعلق به نسخهٔ جدیدتری از دنگ‌بان است.')
+  let migrated = input
+  while (migrated.version < CURRENT_STORAGE_VERSION) {
+    const migration = migrations[migrated.version]
+    if (!migration) throw new Error(`مسیر مهاجرت نسخهٔ ${migrated.version} موجود نیست.`)
+    migrated = migration(migrated)
+  }
+  return { ...defaultState(), ...migrated, settings: { ...defaultState().settings, ...migrated.settings }, meta: { ...defaultState().meta, ...migrated.meta } }
+}
+
 function loadState() {
+  let raw
   try {
-    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY))
-    if (!parsed || parsed.version !== 2 || !Array.isArray(parsed.events)) return defaultState()
-    return { ...defaultState(), ...parsed, settings: { ...defaultState().settings, ...parsed.settings } }
+    const sourceKey = [STORAGE_KEY, ...LEGACY_STORAGE_KEYS].find((key) => localStorage.getItem(key))
+    if (!sourceKey) return defaultState()
+    raw = localStorage.getItem(sourceKey)
+    const parsed = JSON.parse(raw)
+    if (parsed.version < CURRENT_STORAGE_VERSION) {
+      try { localStorage.setItem(MIGRATION_BACKUP_KEY, raw) } catch { /* migration can continue without the optional backup */ }
+    }
+    const migrated = migrateState(parsed)
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated)) } catch { /* keep the migrated in-memory copy when storage is full */ }
+    return migrated
   } catch {
     return defaultState()
   }
@@ -21,7 +53,7 @@ function loadState() {
 
 const state = reactive(loadState())
 function persist() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)) } catch { /* the UI remains usable in restricted storage modes */ }
 }
 
 function findEvent(id) { return state.events.find((event) => event.id === id) }
@@ -62,10 +94,13 @@ function deleteExpense(eventId, expenseId) { const event = findEvent(eventId); i
 function updateSettings(patch) { Object.assign(state.settings, patch); persist() }
 function removeSavedPerson(name) { state.savedPeople = state.savedPeople.filter((item) => item !== name); persist() }
 function importData(data) {
-  if (!data || data.version !== 2 || !Array.isArray(data.events)) throw new Error('فایل پشتیبان معتبر نیست.')
-  Object.assign(state, defaultState(), data); persist()
+  const migrated = migrateState(data)
+  Object.assign(state, defaultState(), migrated); persist()
 }
-function clearAll() { Object.assign(state, defaultState()); localStorage.removeItem(STORAGE_KEY) }
+function clearAll() {
+  Object.assign(state, defaultState())
+  ;[STORAGE_KEY, MIGRATION_BACKUP_KEY, ...LEGACY_STORAGE_KEYS].forEach((key) => localStorage.removeItem(key))
+}
 
 const api = { state: readonly(state), findEvent, createEvent, updateEvent, deleteEvent, duplicateEvent, addPerson, removePerson, addExpense, updateExpense, deleteExpense, updateSettings, removeSavedPerson, importData, clearAll }
 export function useEventStore() { return api }

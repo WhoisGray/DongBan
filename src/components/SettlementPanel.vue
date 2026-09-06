@@ -1,17 +1,18 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { calculateEvent } from '../utils/settlement.js'
 import { formatMoney } from '../utils/money.js'
 import { useToast } from '../composables/useToast.js'
 
 const props = defineProps({ event: { type: Object, required: true } })
 const result = computed(() => calculateEvent(props.event)); const toast = useToast()
+const creatingImage = ref(false)
 const person = (id) => props.event.people.find((item) => item.id === id)
 const summary = computed(() => {
   const lines = [`🧾 تسویه «${props.event.title}»`, `💰 کل هزینه: ${formatMoney(result.value.total, props.event.currency)}`, '']
   if (!result.value.transfers.length) lines.push('✅ حساب همه صاف است؛ پرداختی لازم نیست.')
   else { lines.push('💸 پرداخت‌های نهایی:'); result.value.transfers.forEach((tx) => lines.push(`• ${person(tx.from)?.name} ← به ← ${person(tx.to)?.name}: ${formatMoney(tx.amount, props.event.currency)}`)); lines.push('', '✅ با انجام پرداخت‌های بالا حساب‌ها بسته می‌شود.') }
-  lines.push('', 'ساخته‌شده با دنگ‌بان')
+  lines.push('', '🌐 dongban.ir')
   return lines.join('\n')
 })
 async function copy() {
@@ -21,6 +22,28 @@ async function copy() {
 async function share() {
   if (navigator.share) { try { await navigator.share({ title: `تسویه ${props.event.title}`, text: summary.value }) } catch { /* user cancelled */ } }
   else copy()
+}
+async function settlementFile() {
+  const { createSettlementImage } = await import('../utils/shareImage.js')
+  const blob = await createSettlementImage(props.event, result.value)
+  return new File([blob], `dongban-${props.event.id}.png`, { type: 'image/png' })
+}
+async function downloadImage() {
+  creatingImage.value = true
+  try {
+    const file = await settlementFile(); const url = URL.createObjectURL(file); const link = document.createElement('a')
+    link.href = url; link.download = file.name; link.click(); URL.revokeObjectURL(url); toast.show('کارت تسویه دانلود شد.')
+  } catch { toast.show('ساخت تصویر ممکن نشد.', 'error') }
+  finally { creatingImage.value = false }
+}
+async function shareImage() {
+  creatingImage.value = true
+  try {
+    const file = await settlementFile()
+    if (navigator.canShare?.({ files: [file] })) await navigator.share({ title: `تسویه ${props.event.title}`, text: 'خلاصهٔ تسویه با دنگ‌بان — dongban.ir', files: [file] })
+    else { const url = URL.createObjectURL(file); const link = document.createElement('a'); link.href = url; link.download = file.name; link.click(); URL.revokeObjectURL(url); toast.show('اشتراک فایل پشتیبانی نشد؛ تصویر دانلود شد.') }
+  } catch { /* cancelled or unavailable */ }
+  finally { creatingImage.value = false }
 }
 </script>
 
@@ -43,7 +66,7 @@ async function share() {
         </article>
       </div>
       <div v-else class="empty compact"><span>🎉</span><h3>همه‌چیز صاف است!</h3><p>هیچ پرداختی لازم نیست.</p></div>
-      <div class="actions"><button class="btn btn--ghost" @click="copy">کپی متن</button><button class="btn btn--primary" @click="share">اشتراک‌گذاری</button></div>
+      <div class="actions settlement-actions"><button class="btn btn--ghost" @click="copy">کپی متن</button><button class="btn btn--ghost" @click="share">اشتراک متن</button><button class="btn btn--ghost" :disabled="creatingImage" @click="downloadImage">دانلود کارت</button><button class="btn btn--primary" :disabled="creatingImage" @click="shareImage">{{ creatingImage ? 'در حال ساخت…' : 'اشتراک تصویر' }}</button></div>
       <pre class="share-preview">{{ summary }}</pre>
     </section>
   </div>
