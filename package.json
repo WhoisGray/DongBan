@@ -19,6 +19,7 @@
   "dependencies": {
     "@fontsource-variable/estedad": "^5.3.0",
     "@fontsource/lalezar": "^5.3.0",
+    "@vercel/analytics": "^2.0.1",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   },
