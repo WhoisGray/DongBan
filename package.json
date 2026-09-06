@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "دنگ‌بان؛ مدیریت و تسویه هوشمند هزینه‌های گروهی",
+  "repository": { "type": "git", "url": "https://github.com/WhoisGray/DongBan.git" },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

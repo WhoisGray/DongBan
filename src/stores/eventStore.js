@@ -20,10 +20,8 @@ function loadState() {
 }
 
 const state = reactive(loadState())
-let saveTimer
 function persist() {
-  clearTimeout(saveTimer)
-  saveTimer = setTimeout(() => localStorage.setItem(STORAGE_KEY, JSON.stringify(state)), 80)
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
 }
 
 function findEvent(id) { return state.events.find((event) => event.id === id) }
@@ -42,7 +40,7 @@ function updateEvent(id, patch) { const event = findEvent(id); if (event) { Obje
 function deleteEvent(id) { state.events = state.events.filter((event) => event.id !== id); persist() }
 function duplicateEvent(id) {
   const source = findEvent(id); if (!source) return null
-  const copy = structuredClone(source); copy.id = createId('event'); copy.title = `${source.title} (کپی)`
+  const copy = JSON.parse(JSON.stringify(source)); copy.id = createId('event'); copy.title = `${source.title} (کپی)`
   copy.expenses = []; copy.createdAt = copy.updatedAt = new Date().toISOString(); state.events.unshift(copy); persist(); return copy
 }
 function addPerson(eventId, name) {

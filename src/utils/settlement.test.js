@@ -22,9 +22,13 @@ describe('roundBalancedBalances', () => {
 
 describe('optimizeTransfers', () => {
   it('finds fewer transfers than the previous greedy counterexample', () => {
-    const transfers = optimizeTransfers({ a: 3, b: 2, c: 1, d: -2, e: -2, f: -2 })
+    const original = { a: 3, b: 2, c: 1, d: -2, e: -2, f: -2 }
+    const transfers = optimizeTransfers(original)
     expect(transfers).toHaveLength(4)
     expect(transfers.reduce((sum, tx) => sum + tx.amount, 0)).toBe(6)
+    const settled = { ...original }
+    transfers.forEach((tx) => { settled[tx.from] += tx.amount; settled[tx.to] -= tx.amount })
+    expect(Object.values(settled)).toEqual([0, 0, 0, 0, 0, 0])
   })
 })
 

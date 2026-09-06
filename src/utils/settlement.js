@@ -37,7 +37,7 @@ export function roundBalancedBalances(exactBalances, increment) {
   return Object.fromEntries(rows.map((row) => [row.personId, row.units * increment]))
 }
 
-const stateKey = (balances) => balances.map((item) => item.amount).sort((a, b) => a - b).join(',')
+const stateKey = (balances) => balances.map((item) => `${item.personId}:${item.amount}`).sort().join(',')
 
 export function optimizeTransfers(inputBalances, exactLimit = 10) {
   const balances = Object.entries(inputBalances)
