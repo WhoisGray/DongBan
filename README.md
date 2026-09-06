@@ -9,6 +9,7 @@ Repository: [github.com/WhoisGray/DongBan](https://github.com/WhoisGray/DongBan)
 - مدیریت چند رویداد مستقل برای سفر، مهمانی و خانهٔ مشترک
 - دفترچهٔ اسامی ماندگار با `localStorage`
 - ثبت هزینه با پرداخت‌کننده، تاریخ، دسته‌بندی، یادداشت و مصرف‌کنندگان
+- تبدیل خودکار ارقام فارسی و عربی و افزودن جداکنندهٔ هزارگان هنگام ورود مبلغ
 - سهم‌های مساوی و وزنی مانند `۰٫۵`، `۱` و `۲`
 - تخصیص دقیق واحد پول با روش Largest Remainder؛ بدون گم‌شدن اعشار
 - رُندکردن تسویه به نزدیک‌ترین ۱، ۱۰، ۱۰۰، ۱٬۰۰۰ یا ۱۰٬۰۰۰
@@ -18,6 +19,7 @@ Repository: [github.com/WhoisGray/DongBan](https://github.com/WhoisGray/DongBan)
 - خروجی و بازیابی کامل JSON
 - کپی یا اشتراک‌گذاری خلاصهٔ تسویه
 - PWA نصب‌پذیر، اجرای آفلاین و پشتیبانی از safe area در iPhone
+- فونت ایرانی Estedad برای رابط و Lalezar برای تیترها، به‌صورت self-hosted و آفلاین
 - route-level code splitting و vendor chunk مجزا
 - تست واحد موتور محاسبه
 - Docker و Docker Compose

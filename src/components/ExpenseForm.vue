@@ -1,7 +1,7 @@
 <script setup>
 import { computed, reactive, watch } from 'vue'
 import { categories } from '../utils/categories.js'
-import { fromMinor, parseAmount } from '../utils/money.js'
+import { formatAmountInput, fromMinor, parseAmount } from '../utils/money.js'
 import { useEventStore } from '../stores/eventStore.js'
 import { useToast } from '../composables/useToast.js'
 
@@ -13,7 +13,7 @@ const isEdit = computed(() => Boolean(props.expense))
 
 function reset() {
   const expense = props.expense
-  form.title = expense?.title || ''; form.amount = expense ? fromMinor(expense.amountMinor, props.event.currency) : ''
+  form.title = expense?.title || ''; form.amount = expense ? formatAmountInput(fromMinor(expense.amountMinor, props.event.currency), props.event.currency) : ''
   form.payerId = expense?.payerId || props.event.people[0]?.id || ''; form.category = expense?.category || 'food'
   form.date = expense?.date || props.event.date; form.note = expense?.note || ''
   form.splits = expense ? { ...expense.splits } : Object.fromEntries(props.event.people.map((person) => [person.id, 1]))
@@ -24,6 +24,7 @@ function toggle(personId) { form.splits[personId] = form.splits[personId] > 0 ? 
 function setWeight(personId, value) {
   const weight = Number(value); if (Number.isFinite(weight) && weight > 0) form.splits[personId] = weight
 }
+function updateAmount(value) { form.amount = formatAmountInput(value, props.event.currency) }
 function submit() {
   const amountMinor = parseAmount(form.amount, props.event.currency)
   if (!form.title.trim()) return toast.show('عنوان هزینه را وارد کنید.', 'error')
@@ -41,7 +42,7 @@ function submit() {
   <form class="stack" @submit.prevent="submit">
     <div class="form-grid">
       <label class="field field--wide"><span>عنوان هزینه</span><input v-model="form.title" autofocus placeholder="مثلاً شام شب اول" /></label>
-      <label class="field"><span>مبلغ</span><input v-model="form.amount" inputmode="decimal" placeholder="120000" /></label>
+      <label class="field"><span>مبلغ</span><input class="money-input" :value="form.amount" inputmode="decimal" autocomplete="off" placeholder="120,000" @input="updateAmount($event.target.value)" /></label>
       <label class="field"><span>پرداخت‌کننده</span><select v-model="form.payerId"><option v-for="person in event.people" :key="person.id" :value="person.id">{{ person.name }}</option></select></label>
       <label class="field"><span>دسته‌بندی</span><select v-model="form.category"><option v-for="category in categories" :key="category.id" :value="category.id">{{ category.icon }} {{ category.label }}</option></select></label>
       <label class="field"><span>تاریخ</span><input v-model="form.date" type="date" /></label>

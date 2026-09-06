@@ -7,6 +7,29 @@ export function toMinor(amount, currencyCode = 'TOMAN') {
   return Math.round(number * factor)
 }
 export const fromMinor = (amount, code = 'TOMAN') => amount / (10 ** getCurrency(code).decimals)
+
+export function normalizeDigits(value) {
+  return String(value)
+    .replace(/[۰-۹]/g, (digit) => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(digit)))
+    .replace(/[٠-٩]/g, (digit) => String('٠١٢٣٤٥٦٧٨٩'.indexOf(digit)))
+    .replace(/٫/g, '.')
+    .replace(/[٬،]/g, ',')
+}
+
+export function formatAmountInput(value, code = 'TOMAN') {
+  const { decimals } = getCurrency(code)
+  const normalized = normalizeDigits(value).replace(/[\s,]/g, '')
+  const hasDecimal = normalized.includes('.')
+  const [integerPart = '', ...decimalParts] = normalized.split('.')
+  const integerDigits = integerPart.replace(/\D/g, '')
+  const decimalDigits = decimalParts.join('').replace(/\D/g, '').slice(0, decimals)
+
+  if (!integerDigits && !hasDecimal) return ''
+  const cleanInteger = (integerDigits || '0').replace(/^0+(?=\d)/, '')
+  const grouped = cleanInteger.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  return decimals > 0 && hasDecimal ? `${grouped}.${decimalDigits}` : grouped
+}
+
 export function formatMoney(minorAmount, code = 'TOMAN', withLabel = true) {
   const currency = getCurrency(code)
   const value = fromMinor(minorAmount, code)
@@ -14,9 +37,7 @@ export function formatMoney(minorAmount, code = 'TOMAN', withLabel = true) {
   return withLabel ? `${formatted} ${currency.label}` : formatted
 }
 export function parseAmount(value, code = 'TOMAN') {
-  const normalized = String(value).replace(/[٬,\s]/g, '')
-    .replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
-    .replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+  const normalized = normalizeDigits(value).replace(/[,\s]/g, '')
   const amount = Number(normalized)
   if (!Number.isFinite(amount) || amount <= 0) return null
   const minor = toMinor(amount, code)

@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "description": "دنگ‌بان؛ مدیریت و تسویه هوشمند هزینه‌های گروهی",
-  "repository": { "type": "git", "url": "https://github.com/WhoisGray/DongBan.git" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WhoisGray/DongBan.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,6 +17,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@fontsource-variable/estedad": "^5.3.0",
+    "@fontsource/lalezar": "^5.3.0",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   },
@@ -26,5 +31,7 @@
     "vite-plugin-pwa": "^1.0.3",
     "vitest": "^3.2.4"
   },
-  "engines": { "node": ">=20.19.0" }
+  "engines": {
+    "node": ">=20.19.0"
+  }
 }
