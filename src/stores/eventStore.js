@@ -97,10 +97,21 @@ function importData(data) {
   const migrated = migrateState(data)
   Object.assign(state, defaultState(), migrated); persist()
 }
+function importEvent(event) {
+  if (!event || !event.id || !Array.isArray(event.people) || !Array.isArray(event.expenses)) throw new Error('رویداد قابل ورود نیست.')
+  const copy = JSON.parse(JSON.stringify(event))
+  if (findEvent(copy.id)) copy.id = createId('event')
+  state.events.unshift(copy)
+  copy.people.forEach((person) => {
+    if (!state.savedPeople.some((name) => name.localeCompare(person.name, 'fa', { sensitivity: 'base' }) === 0)) state.savedPeople.push(person.name)
+  })
+  persist()
+  return copy
+}
 function clearAll() {
   Object.assign(state, defaultState())
   ;[STORAGE_KEY, MIGRATION_BACKUP_KEY, ...LEGACY_STORAGE_KEYS].forEach((key) => localStorage.removeItem(key))
 }
 
-const api = { state: readonly(state), findEvent, createEvent, updateEvent, deleteEvent, duplicateEvent, addPerson, removePerson, addExpense, updateExpense, deleteExpense, updateSettings, removeSavedPerson, importData, clearAll }
+const api = { state: readonly(state), findEvent, createEvent, updateEvent, deleteEvent, duplicateEvent, addPerson, removePerson, addExpense, updateExpense, deleteExpense, updateSettings, removeSavedPerson, importData, importEvent, clearAll }
 export function useEventStore() { return api }

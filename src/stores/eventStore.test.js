@@ -7,7 +7,7 @@ globalThis.localStorage = {
   removeItem: (key) => storage.delete(key)
 }
 
-const { migrateState } = await import('./eventStore.js')
+const { migrateState, useEventStore } = await import('./eventStore.js')
 
 describe('storage migrations', () => {
   it('keeps v2 events and people while upgrading to v3', () => {
@@ -18,5 +18,14 @@ describe('storage migrations', () => {
     expect(migrated.events[0].title).toBe('سفر')
     expect(migrated.settings.theme).toBe('dark')
     expect(migrated.meta.migratedAt).toBeTruthy()
+  })
+})
+
+describe('event import', () => {
+  it('adds imported names to the address book', () => {
+    const store = useEventStore()
+    const event = store.importEvent({ id: 'event_imported', title: 'رویداد واردشده', people: [{ id: 'p1', name: 'مینا' }], expenses: [], createdAt: '', updatedAt: '' })
+    expect(store.findEvent(event.id).title).toBe('رویداد واردشده')
+    expect(store.state.savedPeople).toContain('مینا')
   })
 })
