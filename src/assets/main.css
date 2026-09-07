@@ -68,26 +68,17 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
   color: var(--ink);
   background: var(--background);
-  overscroll-behavior-y: none;
   direction: rtl;
 }
 
 .app-shell {
   min-height: 100vh;
-  max-width: 100%;
-  overflow-x: hidden;
   background: var(--background);
   color: var(--ink);
 }
