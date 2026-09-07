@@ -6,6 +6,7 @@ export default createRouter({
     { path: '/', name: 'dashboard', component: () => import('./views/DashboardView.vue') },
     { path: '/event/:id', name: 'event', component: () => import('./views/EventView.vue'), props: true },
     { path: '/settings', name: 'settings', component: () => import('./views/SettingsView.vue') },
+    { path: '/guide', name: 'guide', component: () => import('./views/GuideView.vue') },
     { path: '/about', name: 'about', component: () => import('./views/AboutView.vue') },
     { path: '/:pathMatch(.*)*', redirect: '/' }
   ],

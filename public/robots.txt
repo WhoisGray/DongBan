@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /event/
+
+Sitemap: https://dongban.ir/sitemap.xml

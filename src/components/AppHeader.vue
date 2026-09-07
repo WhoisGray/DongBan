@@ -13,6 +13,7 @@ const route = useRoute()
       </RouterLink>
       <div class="topbar__actions"><PwaInstallButton /><nav class="topbar__nav" aria-label="منوی اصلی">
         <RouterLink to="/" :class="{ active: route.name === 'dashboard' }">رویدادها</RouterLink>
+        <RouterLink to="/guide" :class="{ active: route.name === 'guide' }">راهنما</RouterLink>
         <RouterLink to="/settings" :class="{ active: route.name === 'settings' }">تنظیمات</RouterLink>
       </nav></div>
     </div>
