@@ -1,6 +1,6 @@
 <script setup>
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import BaseModal from '../components/BaseModal.vue'
 import PersonManager from '../components/PersonManager.vue'
 import ExpenseForm from '../components/ExpenseForm.vue'
@@ -17,9 +17,19 @@ import EventTransferPanel from '../components/EventTransferPanel.vue'
 const props = defineProps({ id: { type: String, required: true } })
 const store = useEventStore()
 const router = useRouter()
+const route = useRoute()
 
 const event = computed(() => store.findEvent(props.id))
-const tab = ref('overview')
+const tab = ref((route.query.tab && ['overview', 'expenses', 'splits', 'settlement'].includes(route.query.tab)) ? route.query.tab : 'overview')
+watch(() => route.query.tab, (val) => {
+  if (val && ['overview', 'expenses', 'splits', 'settlement'].includes(val)) {
+    tab.value = val
+  }
+})
+function selectTab(id) {
+  tab.value = id
+  router.replace({ query: { ...route.query, tab: id } })
+}
 const showExpense = ref(false)
 const showPeople = ref(false)
 const showDetails = ref(false)
@@ -78,7 +88,7 @@ function updateDetail(key, value) {
           v-for="item in tabs"
           :key="item.id"
           :class="{ active: tab === item.id }"
-          @click="tab = item.id"
+          @click="selectTab(item.id)"
         >
           <span>{{ item.icon }}</span>
           {{ item.label }}

@@ -68,6 +68,12 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -80,6 +86,8 @@ body {
 
 .app-shell {
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--background);
   color: var(--ink);
 }
@@ -1547,18 +1555,43 @@ a {
 
 @media (max-width: 560px) {
   .main-shell {
-    padding-top: 18px;
+    padding: 16px 12px max(80px, calc(36px + env(safe-area-inset-bottom))) 12px;
   }
   .topbar__inner {
-    height: 60px;
-    padding: 0 14px;
+    height: 56px;
+    padding: 0 10px;
+    gap: 6px;
+  }
+  .brand {
+    gap: 6px;
+    flex-shrink: 0;
   }
   .brand__mark {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+  .brand strong {
+    font-size: 14px;
+  }
+  .brand small {
+    display: none;
+  }
+  .topbar__actions {
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .install-btn {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+  .topbar__nav {
+    padding: 2px;
+    gap: 2px;
   }
   .topbar__nav a {
-    padding: 6px 10px;
+    padding: 5px 7px;
     font-size: 11px;
   }
   .hero {
@@ -1578,22 +1611,44 @@ a {
   .split-grid {
     grid-template-columns: 1fr;
   }
+  .dashboard-heading {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .dashboard-heading .search {
+    width: 100% !important;
+  }
   .panel {
-    padding: 18px;
+    padding: 16px 14px;
     border-radius: 18px;
   }
   .event-banner {
-    padding: 16px 16px 0;
+    padding: 14px 14px 0;
     border-radius: 20px;
   }
+  .event-banner__main {
+    padding: 10px 0 14px;
+    gap: 12px;
+  }
   .event-banner h1 {
-    font-size: 26px;
+    font-size: 22px;
+  }
+  .event-banner__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    width: 100%;
   }
   .event-banner__actions .btn {
-    min-width: calc(50% - 4px);
+    min-width: 0;
+    width: 100%;
+    font-size: 12px;
+    padding: 7px 6px;
+    min-height: 38px;
   }
   .tabs {
-    gap: 18px;
+    gap: 14px;
   }
   .toolbar {
     grid-template-columns: 1fr;
