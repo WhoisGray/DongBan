@@ -6,7 +6,6 @@ import { useToast } from '../composables/useToast.js'
 import {
   BANKS_LIST,
   cleanDigits,
-  convertPersianToEnglishDigits,
   extractShebaDigits,
   formatCardNumber,
   formatSheba,
@@ -204,11 +203,12 @@ function removeAccount(accountId) {
             <span>شماره شبا (۲۴ رقم بدون IR یا با IR)</span>
             <div class="input-with-prefix">
               <input
-                v-model="rawSheba"
+                :value="rawSheba"
                 dir="ltr"
                 type="text"
                 placeholder="120170000000123456789012"
                 class="money-input mono-font"
+                @input="handleShebaInput"
               />
               <span class="input-prefix">IR</span>
             </div>

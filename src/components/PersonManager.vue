@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useEventStore } from '../stores/eventStore.js'
 import { useToast } from '../composables/useToast.js'
 import AccountModal from './AccountModal.vue'
@@ -7,6 +7,7 @@ import {
   BANKS_LIST,
   cleanDigits,
   extractShebaDigits,
+  formatCardNumber,
   getBankFromCard,
   getBankFromShaba,
   getBankIconUrl,
@@ -155,96 +156,100 @@ function getAccountsForPerson(personName) {
     </div>
 
     <!-- Optional bank fields when adding a person -->
-    <div v-if="showBankFields" class="optional-bank-box">
+    <div class="optional-bank-box">
       <small class="muted" style="margin-bottom: 8px; display: block;">
         اطلاعات بانکی اختیاری است و برای همه رویدادها در دفترچه مخاطبین ذخیره می‌شود:
       </small>
-      <div class="form-grid">
-        <label class="field">
-          <span class="field-label-flex">
-            <span>شماره کارت (۱۶ رقم)</span>
-            <span v-if="bankKey && bankKey !== 'no-img'" class="bank-tag-inline">
-              <img :src="getBankIconUrl(bankKey)" :alt="bankName" class="bank-icon-xs" />
-              <small>{{ bankName }}</small>
+      <Transition name="expand-fade">
+        <div v-if="showBankFields" class="bank-fields-grid">
+          <label class="field">
+            <span class="field-label-flex">
+              <span>شماره کارت (۱۶ رقم)</span>
+              <span v-if="bankKey && bankKey !== 'no-img'" class="bank-tag-inline">
+                <img :src="getBankIconUrl(bankKey)" :alt="bankName" class="bank-icon-xs" />
+                <small>{{ bankName }}</small>
+              </span>
             </span>
-          </span>
-          <div class="input-with-icon">
-            <input
-              :value="rawCard"
-              dir="ltr"
-              type="text"
-              inputmode="numeric"
-              maxlength="19"
-              placeholder="6037 9911 2233 4455"
-              class="money-input"
-              @input="handleCardInput"
-            />
-            <img :src="getBankIconUrl(bankKey)" :alt="bankName" class="input-bank-logo" />
-          </div>
-        </label>
+            <div class="input-with-icon">
+              <input
+                :value="rawCard"
+                dir="ltr"
+                type="text"
+                inputmode="numeric"
+                maxlength="19"
+                placeholder="6037 9911 2233 4455"
+                class="money-input"
+                @input="handleCardInput"
+              />
+              <img :src="getBankIconUrl(bankKey)" :alt="bankName" class="input-bank-logo" />
+            </div>
+          </label>
 
-        <label class="field">
-          <span>شماره شبا (IBAN)</span>
-          <div class="input-with-prefix">
-            <input
-              v-model="rawSheba"
-              dir="ltr"
-              type="text"
-              placeholder="120170000000123456789012"
-              class="money-input"
-            />
-            <span class="input-prefix">IR</span>
-          </div>
-        </label>
+          <label class="field">
+            <span>شماره شبا (IBAN)</span>
+            <div class="input-with-prefix">
+              <input
+                v-model="rawSheba"
+                dir="ltr"
+                type="text"
+                placeholder="120170000000123456789012"
+                class="money-input"
+              />
+              <span class="input-prefix">IR</span>
+            </div>
+          </label>
 
-        <label class="field field--wide">
-          <span>بانک</span>
-          <div class="select-with-logo">
-            <select :value="bankKey" @change="onBankSelect">
-              <option value="no-img">انتخاب از لیست بانک‌ها…</option>
-              <option v-for="b in BANKS_LIST" :key="b.key" :value="b.key">
-                {{ b.name }}
-              </option>
-            </select>
-            <img :src="getBankIconUrl(bankKey)" :alt="bankName" class="select-bank-logo" />
-          </div>
-        </label>
-      </div>
+          <label class="field field--wide">
+            <span>بانک</span>
+            <div class="select-with-logo">
+              <select :value="bankKey" @change="onBankSelect">
+                <option value="no-img">انتخاب از لیست بانک‌ها…</option>
+                <option v-for="b in BANKS_LIST" :key="b.key" :value="b.key">
+                  {{ b.name }}
+                </option>
+              </select>
+              <img :src="getBankIconUrl(bankKey)" :alt="bankName" class="select-bank-logo" />
+            </div>
+          </label>
+        </div>
+      </Transition>
     </div>
 
     <!-- People list -->
     <div v-if="event.people.length" class="people-grid">
-      <div v-for="person in event.people" :key="person.id" class="person-chip">
-        <span class="avatar">{{ person.name.slice(0, 1) }}</span>
-        <strong>{{ person.name }}</strong>
+      <TransitionGroup name="chip-anim">
+        <div v-for="person in event.people" :key="person.id" class="person-chip">
+          <span class="avatar">{{ person.name.slice(0, 1) }}</span>
+          <strong>{{ person.name }}</strong>
 
-        <!-- Bank account badge & quick-edit trigger -->
-        <button
-          v-if="getAccountsForPerson(person.name).length"
-          class="person-account-badge"
-          :title="`مدیریت حساب‌های ${person.name}`"
-          @click="activeAccountPerson = person.name"
-        >
-          <img
-            :src="getBankIconUrl(getAccountsForPerson(person.name)[0].bankKey)"
-            :alt="getAccountsForPerson(person.name)[0].bankName"
-            class="bank-icon-chip"
-          />
-          <span v-if="getAccountsForPerson(person.name).length > 1" class="acc-count">
-            {{ getAccountsForPerson(person.name).length }}
-          </span>
-        </button>
-        <button
-          v-else
-          class="person-account-badge person-account-badge--add"
-          :title="`افزودن اطلاعات بانکی ${person.name}`"
-          @click="activeAccountPerson = person.name"
-        >
-          + 💳
-        </button>
+          <!-- Bank account badge & quick-edit trigger -->
+          <button
+            v-if="getAccountsForPerson(person.name).length"
+            class="person-account-badge"
+            :title="`مدیریت حساب‌های ${person.name}`"
+            @click="activeAccountPerson = person.name"
+          >
+            <img
+              :src="getBankIconUrl(getAccountsForPerson(person.name)[0].bankKey)"
+              :alt="getAccountsForPerson(person.name)[0].bankName"
+              class="bank-icon-chip"
+            />
+            <span v-if="getAccountsForPerson(person.name).length > 1" class="acc-count">
+              {{ getAccountsForPerson(person.name).length }}
+            </span>
+          </button>
+          <button
+            v-else
+            class="add-account-mini-btn"
+            :title="`افزودن حساب بانکی برای ${person.name}`"
+            @click="activeAccountPerson = person.name"
+          >
+            💳+
+          </button>
 
-        <button class="icon-btn icon-btn--danger" :aria-label="`حذف ${person.name}`" @click="remove(person)">×</button>
-      </div>
+          <button class="chip-remove" aria-label="حذف" @click="remove(person)">×</button>
+        </div>
+      </TransitionGroup>
     </div>
     <div v-else class="empty compact">
       <span>👋</span>

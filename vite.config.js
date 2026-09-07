@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { readFileSync } from 'node:fs'
 import process from 'node:process'
@@ -8,6 +9,7 @@ const packageJson = JSON.parse(readFileSync(new URL('./package.json', import.met
 
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     vue(),
     VitePWA({
       registerType: 'prompt',

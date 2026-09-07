@@ -35,7 +35,13 @@ watch(
 <template>
   <div class="app-shell" :data-theme="store.state.settings.theme">
     <AppHeader />
-    <main class="main-shell"><RouterView /></main>
+    <main class="main-shell">
+      <RouterView v-slot="{ Component }">
+        <Transition name="page-fade" mode="out-in">
+          <component :is="Component" />
+        </Transition>
+      </RouterView>
+    </main>
     <AppFooter />
     <ToastStack />
     <PwaUpdatePrompt />

@@ -18,11 +18,11 @@ function fitText(ctx, text, maxWidth, initialSize, minimumSize = 28) {
 
 const imageCache = new Map()
 function loadBankImage(bankKey) {
-  if (typeof Image === 'undefined') return Promise.resolve(null)
+  if (typeof window === 'undefined' || typeof window.Image === 'undefined') return Promise.resolve(null)
   const key = (!bankKey || bankKey === 'no-img') ? 'no-img' : bankKey
   if (imageCache.has(key)) return Promise.resolve(imageCache.get(key))
   return new Promise((resolve) => {
-    const img = new Image()
+    const img = new window.Image()
     img.crossOrigin = 'anonymous'
     img.onload = () => {
       imageCache.set(key, img)

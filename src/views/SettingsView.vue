@@ -168,26 +168,34 @@ async function checkUpdate() {
       </div>
 
       <!-- Contacts list -->
-      <div v-if="filteredContacts.length" class="contacts-grid">
-        <div v-for="contact in filteredContacts" :key="contact.id" class="contact-card">
-          <div class="contact-card__main">
-            <span class="avatar avatar--soft">{{ contact.name.slice(0, 1) }}</span>
-            <div>
-              <strong>{{ contact.name }}</strong>
-              <div v-if="contact.accounts?.length" class="contact-accounts-preview">
-                <span v-for="acc in contact.accounts" :key="acc.id" class="account-pill">
-                  <img :src="getBankIconUrl(acc.bankKey)" :alt="acc.bankName" class="bank-icon-xs" />
-                  <small>{{ acc.bankName || 'بانک' }}</small>
-                  <span v-if="acc.cardNumber" class="mono-text">
+      <div v-if="filteredContacts.length" class="grid gap-3">
+        <div
+          v-for="contact in filteredContacts"
+          :key="contact.id"
+          class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 border border-line rounded-2xl bg-surface-2 transition-all hover:border-slate-300 dark:hover:border-slate-700"
+        >
+          <div class="flex items-center gap-3">
+            <span class="avatar avatar--soft flex-none">{{ contact.name.slice(0, 1) }}</span>
+            <div class="grid gap-1">
+              <strong class="font-bold text-ink">{{ contact.name }}</strong>
+              <div v-if="contact.accounts?.length" class="flex flex-wrap gap-1.5">
+                <span
+                  v-for="acc in contact.accounts"
+                  :key="acc.id"
+                  class="inline-flex items-center gap-1.5 px-2 py-0.5 border border-line rounded-full bg-surface text-xs"
+                >
+                  <img :src="getBankIconUrl(acc.bankKey)" :alt="acc.bankName" class="w-4 h-4 object-contain" />
+                  <small class="text-muted">{{ acc.bankName || 'بانک' }}</small>
+                  <span v-if="acc.cardNumber" class="font-mono text-muted font-bold text-xs" dir="ltr">
                     {{ formatCardNumber(acc.cardNumber).slice(-9) }}
                   </span>
                 </span>
               </div>
-              <small v-else class="muted">حساب بانکی ثبت نشده</small>
+              <small v-else class="text-xs text-muted">حساب بانکی ثبت نشده</small>
             </div>
           </div>
 
-          <div class="row-actions">
+          <div class="flex items-center gap-2 self-end sm:self-center">
             <button
               class="btn btn--ghost btn--sm"
               :title="`مدیریت حساب‌های ${contact.name}`"
@@ -256,60 +264,3 @@ async function checkUpdate() {
     />
   </div>
 </template>
-
-<style scoped>
-.contacts-grid {
-  display: grid;
-  gap: 10px;
-}
-.contact-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 16px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--surface-2);
-}
-.contact-card__main {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.contact-card__main > div {
-  display: grid;
-  gap: 4px;
-}
-.contact-accounts-preview {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.account-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 2px 8px;
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  background: var(--surface);
-  font-size: 11px;
-}
-.bank-icon-xs {
-  width: 15px;
-  height: 15px;
-  object-fit: contain;
-}
-.mono-text {
-  font-family: monospace;
-  direction: ltr;
-  color: var(--muted);
-  font-weight: 700;
-}
-.btn--sm {
-  min-height: 36px;
-  padding: 6px 12px;
-  font-size: 12px;
-}
-</style>

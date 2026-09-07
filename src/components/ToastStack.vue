@@ -5,6 +5,15 @@ const { messages } = useToast()
 
 <template>
   <div class="toast-stack" aria-live="polite">
-    <div v-for="message in messages" :key="message.id" class="toast" :class="`toast--${message.type}`">{{ message.text }}</div>
+    <TransitionGroup name="toast-anim">
+      <div
+        v-for="message in messages"
+        :key="message.id"
+        class="toast"
+        :class="`toast--${message.type}`"
+      >
+        {{ message.text }}
+      </div>
+    </TransitionGroup>
   </div>
 </template>

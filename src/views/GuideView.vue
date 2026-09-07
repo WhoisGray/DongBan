@@ -2,6 +2,7 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import BaseModal from '../components/BaseModal.vue'
+import PersianDatePicker from '../components/PersianDatePicker.vue'
 import { useEventStore } from '../stores/eventStore.js'
 import { currencies } from '../utils/currencies.js'
 import { todayIso } from '../utils/date.js'
@@ -85,7 +86,29 @@ function create() {
     </section>
 
     <BaseModal v-if="showCreate" title="رویداد تازه" @close="showCreate = false">
-      <form class="stack" @submit.prevent="create"><label class="field"><span>نام رویداد</span><input v-model="form.title" autofocus placeholder="مثلاً سفر شمال" /></label><div class="form-grid"><label class="field"><span>تاریخ</span><input v-model="form.date" type="date" /></label><label class="field"><span>واحد پول</span><select v-model="form.currency"><option v-for="currency in currencies" :key="currency.code" :value="currency.code">{{ currency.label }}</option></select></label></div><label class="field"><span>توضیح کوتاه</span><textarea v-model="form.note" rows="3" placeholder="اختیاری" /></label><div class="actions"><button type="button" class="btn btn--ghost" @click="showCreate = false">انصراف</button><button class="btn btn--primary">ساخت رویداد</button></div></form>
+      <form class="stack" @submit.prevent="create">
+        <label class="field">
+          <span>نام رویداد</span>
+          <input v-model="form.title" autofocus placeholder="مثلاً سفر شمال" />
+        </label>
+        <div class="form-grid">
+          <PersianDatePicker v-model="form.date" />
+          <label class="field">
+            <span>واحد پول</span>
+            <select v-model="form.currency">
+              <option v-for="currency in currencies" :key="currency.code" :value="currency.code">{{ currency.label }}</option>
+            </select>
+          </label>
+        </div>
+        <label class="field">
+          <span>توضیح کوتاه</span>
+          <textarea v-model="form.note" rows="3" placeholder="اختیاری" />
+        </label>
+        <div class="actions">
+          <button type="button" class="btn btn--ghost" @click="showCreate = false">انصراف</button>
+          <button class="btn btn--primary">ساخت رویداد</button>
+        </div>
+      </form>
     </BaseModal>
   </div>
 </template>

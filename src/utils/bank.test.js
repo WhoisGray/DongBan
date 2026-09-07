@@ -39,6 +39,8 @@ describe('bank utilities', () => {
     expect(getBankFromShaba('012')?.bankKey).toBe('mellat')
     expect(getBankFromShaba('IR120170000000123456789012')?.bankKey).toBe('meli')
     expect(getBankFromShaba('IR880180000000123456789012')?.bankKey).toBe('tejarat')
+    expect(validateSheba('123')).toBe(false)
+    expect(validateSheba('IR123')).toBe(false)
   })
 
   it('formats card and sheba numbers', () => {
