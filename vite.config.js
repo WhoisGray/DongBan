@@ -23,7 +23,11 @@ export default defineConfig({
           { src: '/icons/pwa-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
         ]
       },
-      workbox: { globPatterns: ['**/*.{js,css,html,svg,png,woff2}'], navigateFallback: 'index.html' }
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
+        navigateFallback: 'index.html',
+        navigateFallbackDenylist: [/\.(?:xml|txt|json|webmanifest|ico|png|svg|jpe?g|gif|webp|woff2?|css|js)$/]
+      }
     })
   ],
   build: {
