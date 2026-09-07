@@ -21,6 +21,7 @@
     "@fontsource-variable/estedad": "^5.3.0",
     "@fontsource/lalezar": "^5.3.0",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "exceljs": "^4.4.0",
     "jalaali-js": "^2.0.1",
     "vue": "^3.5.18",

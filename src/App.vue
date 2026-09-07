@@ -2,6 +2,7 @@
 import { watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import { Analytics } from '@vercel/analytics/vue'
+import { SpeedInsights } from '@vercel/speed-insights/vue'
 import AppHeader from './components/AppHeader.vue'
 import ToastStack from './components/ToastStack.vue'
 import PwaUpdatePrompt from './components/PwaUpdatePrompt.vue'
@@ -61,5 +62,6 @@ watch(
     <ToastStack />
     <PwaUpdatePrompt />
     <Analytics />
+    <SpeedInsights />
   </div>
 </template>
