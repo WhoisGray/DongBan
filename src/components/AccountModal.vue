@@ -152,11 +152,11 @@ function removeAccount(accountId) {
             <div class="account-card__details">
               <div v-if="acc.cardNumber" class="account-card__row">
                 <span class="muted">شماره کارت:</span>
-                <span class="mono-num">{{ formatCardNumber(acc.cardNumber) }}</span>
+                <bdi class="mono-num" dir="ltr">{{ formatCardNumber(acc.cardNumber) }}</bdi>
               </div>
               <div v-if="acc.shebaNumber" class="account-card__row">
                 <span class="muted">شماره شبا:</span>
-                <span class="mono-num">{{ formatSheba(acc.shebaNumber) }}</span>
+                <bdi class="mono-num" dir="ltr">{{ formatSheba(acc.shebaNumber) }}</bdi>
               </div>
             </div>
             <button class="icon-btn icon-btn--danger" aria-label="حذف حساب" @click="removeAccount(acc.id)">×</button>
@@ -349,6 +349,7 @@ function removeAccount(accountId) {
 .mono-num {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   direction: ltr;
+  unicode-bidi: isolate;
   font-weight: 700;
   color: var(--ink);
 }

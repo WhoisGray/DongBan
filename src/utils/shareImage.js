@@ -16,6 +16,14 @@ function fitText(ctx, text, maxWidth, initialSize, minimumSize = 28) {
   do { ctx.font = `800 ${size}px Estedad`; size -= 2 } while (ctx.measureText(text).width > maxWidth && size > minimumSize)
 }
 
+function fillLtrText(ctx, text, x, y) {
+  ctx.save()
+  ctx.direction = 'ltr'
+  ctx.textAlign = 'left'
+  ctx.fillText(text, x, y)
+  ctx.restore()
+}
+
 const imageCache = new Map()
 function loadBankImage(bankKey) {
   if (typeof window === 'undefined' || typeof window.Image === 'undefined') return Promise.resolve(null)
@@ -140,11 +148,9 @@ export async function createSettlementImage(event, result, creditors = []) {
         ctx.font = '600 21px Estedad'
         ctx.fillText('شماره کارت:', titleX, lineY)
 
-        ctx.textAlign = 'left'
         ctx.fillStyle = '#4338ca'
         ctx.font = '800 25px Estedad'
-        ctx.fillText(formatCardNumber(acc.cardNumber), 120, lineY)
-        ctx.textAlign = 'right'
+        fillLtrText(ctx, formatCardNumber(acc.cardNumber), 120, lineY)
       }
 
       if (acc.shebaNumber) {
@@ -153,11 +159,9 @@ export async function createSettlementImage(event, result, creditors = []) {
         ctx.font = '600 19px Estedad'
         ctx.fillText('شماره شبا:', titleX, lineY)
 
-        ctx.textAlign = 'left'
         ctx.fillStyle = '#1f2937'
         ctx.font = '700 21px Estedad'
-        ctx.fillText(formatSheba(acc.shebaNumber), 120, lineY)
-        ctx.textAlign = 'right'
+        fillLtrText(ctx, formatSheba(acc.shebaNumber), 120, lineY)
       }
 
       y += cardHeight + 14

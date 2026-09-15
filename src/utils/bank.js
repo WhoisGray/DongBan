@@ -209,6 +209,15 @@ export function formatSheba(sheba) {
   return `IR${formattedDigits}`
 }
 
+/**
+ * Keeps an LTR identifier in visual order when it is embedded in Persian text.
+ * Unicode isolates affect presentation only; the identifier itself is unchanged.
+ */
+export function isolateLtr(value) {
+  if (!value) return ''
+  return `\u2066${value}\u2069`
+}
+
 export function getBankIconUrl(bankKey) {
   if (!bankKey || bankKey === 'no-img') return '/icons/bank/no-img.png'
   return `/icons/bank/${bankKey}.png`

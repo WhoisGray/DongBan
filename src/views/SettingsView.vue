@@ -186,9 +186,9 @@ async function checkUpdate() {
                 >
                   <img :src="getBankIconUrl(acc.bankKey)" :alt="acc.bankName" class="w-4 h-4 object-contain" />
                   <small class="text-muted">{{ acc.bankName || 'بانک' }}</small>
-                  <span v-if="acc.cardNumber" class="font-mono text-muted font-bold text-xs" dir="ltr">
+                  <bdi v-if="acc.cardNumber" class="font-mono text-muted font-bold text-xs" dir="ltr">
                     {{ formatCardNumber(acc.cardNumber).slice(-9) }}
-                  </span>
+                  </bdi>
                 </span>
               </div>
               <small v-else class="text-xs text-muted">حساب بانکی ثبت نشده</small>

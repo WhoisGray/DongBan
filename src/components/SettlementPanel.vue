@@ -5,7 +5,7 @@ import { formatMoney } from '../utils/money.js'
 import { useToast } from '../composables/useToast.js'
 import { useEventStore } from '../stores/eventStore.js'
 import AccountModal from './AccountModal.vue'
-import { formatCardNumber, formatSheba, getBankIconUrl } from '../utils/bank.js'
+import { formatCardNumber, formatSheba, getBankIconUrl, isolateLtr } from '../utils/bank.js'
 
 const props = defineProps({ event: { type: Object, required: true } })
 const store = useEventStore()
@@ -63,10 +63,10 @@ const summary = computed(() => {
         c.accounts.forEach((acc) => {
           const bank = acc.bankName ? ` (${acc.bankName})` : ''
           if (acc.cardNumber) {
-            lines.push(`  شماره کارت${bank}: ${formatCardNumber(acc.cardNumber)}`)
+            lines.push(`  شماره کارت${bank}: ${isolateLtr(formatCardNumber(acc.cardNumber))}`)
           }
           if (acc.shebaNumber) {
-            lines.push(`  شماره شبا${bank}: ${formatSheba(acc.shebaNumber)}`)
+            lines.push(`  شماره شبا${bank}: ${isolateLtr(formatSheba(acc.shebaNumber))}`)
           }
         })
       })
@@ -264,7 +264,7 @@ async function shareImage() {
 
                 <div class="account-numbers">
                   <div v-if="acc.cardNumber" class="number-line">
-                    <span class="mono-font">{{ formatCardNumber(acc.cardNumber) }}</span>
+                    <bdi class="mono-font" dir="ltr">{{ formatCardNumber(acc.cardNumber) }}</bdi>
                     <button
                       class="btn-copy"
                       title="کپی شماره کارت"
@@ -274,7 +274,7 @@ async function shareImage() {
                     </button>
                   </div>
                   <div v-if="acc.shebaNumber" class="number-line">
-                    <span class="mono-font">{{ formatSheba(acc.shebaNumber) }}</span>
+                    <bdi class="mono-font" dir="ltr">{{ formatSheba(acc.shebaNumber) }}</bdi>
                     <button
                       class="btn-copy"
                       title="کپی شبا"
@@ -394,6 +394,7 @@ async function shareImage() {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 13px;
   direction: ltr;
+  unicode-bidi: isolate;
   font-weight: 700;
   color: var(--ink);
 }

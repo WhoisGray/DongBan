@@ -7,7 +7,8 @@ import {
   getBankFromShaba,
   validateSheba,
   formatCardNumber,
-  formatSheba
+  formatSheba,
+  isolateLtr
 } from './bank.js'
 
 describe('bank utilities', () => {
@@ -46,5 +47,10 @@ describe('bank utilities', () => {
   it('formats card and sheba numbers', () => {
     expect(formatCardNumber('6037991122334455')).toBe('6037 9911 2233 4455')
     expect(formatSheba('IR120170000000123456789012')).toBe('IR1201 7000 0000 1234 5678 9012')
+  })
+
+  it('isolates LTR identifiers embedded in RTL text', () => {
+    expect(isolateLtr('6037 9911 2233 4455')).toBe('\u20666037 9911 2233 4455\u2069')
+    expect(isolateLtr('')).toBe('')
   })
 })
