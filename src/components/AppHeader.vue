@@ -7,10 +7,10 @@ const route = useRoute()
 <template>
   <header class="topbar">
     <div class="topbar__inner">
-      <RouterLink class="brand group" to="/" aria-label="دنگ‌بان، صفحه اصلی">
+      <RouterLink class="brand group" to="/" aria-label="دنگ بان، صفحه اصلی">
         <span class="brand__mark transition-transform duration-200 group-hover:scale-105">د</span>
         <span>
-          <strong>دنگ‌بان</strong>
+          <strong>دنگ بان</strong>
           <small>DongBan</small>
         </span>
       </RouterLink>

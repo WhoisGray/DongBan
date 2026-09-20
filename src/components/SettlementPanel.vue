@@ -138,7 +138,7 @@ async function shareImage() {
     if (navigator.canShare?.({ files: [file] })) {
       await navigator.share({
         title: `تسویه ${props.event.title}`,
-        text: 'خلاصهٔ تسویه با دنگ‌بان — dongban.ir',
+        text: 'خلاصهٔ تسویه با دنگ بان — dongban.ir',
         files: [file]
       })
     } else {

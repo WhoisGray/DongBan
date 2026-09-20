@@ -15,8 +15,8 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['icons/icon.svg', 'icons/apple-touch-icon.png'],
       manifest: {
-        name: 'دنگ‌بان | DongBan', short_name: 'دنگ‌بان',
-        description: 'مدیریت و تسویه هوشمند هزینه‌های گروهی',
+        name: 'دنگ بان', short_name: 'دنگ بان',
+        description: 'دنگ بان؛ مدیریت و تسویه هوشمند هزینه‌های گروهی (دنگبان)',
         lang: 'fa', dir: 'rtl', theme_color: '#4f46e5', background_color: '#f8fafc',
         id: '/', display: 'standalone', start_url: '/', scope: '/',
         icons: [

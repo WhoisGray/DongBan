@@ -17,6 +17,6 @@ async function install() {
 <template>
   <button v-if="canInstall" class="install-btn" @click="install">نصب اپ</button>
   <div v-if="showHelp" class="install-help" @click.self="showHelp = false">
-    <div><button class="icon-btn" aria-label="بستن" @click="showHelp = false">×</button><span class="install-help__icon">⇧</span><h2>نصب دنگ‌بان روی iPhone</h2><ol><li>در Safari دکمهٔ <strong>Share</strong> را بزن.</li><li>گزینهٔ <strong>Add to Home Screen</strong> را انتخاب کن.</li><li>در پایان روی <strong>Add</strong> بزن.</li></ol></div>
+    <div><button class="icon-btn" aria-label="بستن" @click="showHelp = false">×</button><span class="install-help__icon">⇧</span><h2>نصب دنگ بان روی iPhone</h2><ol><li>در Safari دکمهٔ <strong>Share</strong> را بزن.</li><li>گزینهٔ <strong>Add to Home Screen</strong> را انتخاب کن.</li><li>در پایان روی <strong>Add</strong> بزن.</li></ol></div>
   </div>
 </template>

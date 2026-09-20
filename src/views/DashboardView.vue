@@ -53,14 +53,14 @@ const total = (event) => calculateEvent(event).total
     <section class="hero">
       <div class="relative z-10">
         <span class="hero__badge">همهٔ حساب‌ها، یک‌جا</span>
-        <h1>دُنگ‌ها را ساده ببند.</h1>
-        <p>رویداد بساز، خرج‌ها را ثبت کن و با کمترین انتقال ممکن حساب همه را صاف کن؛ حتی آفلاین.</p>
+        <h1>دنگ بان</h1>
+        <p>با دنگ بان رویداد بساز، خرج‌ها را ثبت کن و حساب همه را صاف کن؛ دنگبان ابزاری کاملاً آفلاین است.</p>
         <button class="btn btn--primary btn--large" @click="showCreate = true">
           ＋ رویداد تازه
         </button>
       </div>
       <div class="hero__visual" aria-hidden="true">
-        <span>دُنگ</span>
+        <span>دنگ</span>
         <strong>بان</strong>
         <i>✓</i>
       </div>

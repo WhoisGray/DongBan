@@ -7,8 +7,8 @@ import { RouterLink } from 'vue-router'
     <div>
       <span class="brand-mini">د</span>
       <p>
-        <strong>دنگ‌بان، متن‌باز و ساخته‌شده برای همه</strong>
-        <small>دُنگ‌ها را ساده ببند.</small>
+        <strong>دنگ بان، متن‌باز و ساخته‌شده برای همه</strong>
+        <small>با دنگ بان دنگ‌ها را ساده ببند.</small>
       </p>
     </div>
     <nav>

@@ -27,8 +27,8 @@ function create() {
 
 const faqs = [
   {
-    q: 'آیا برای استفاده از دُنگ‌بان به اینترنت نیاز دارم؟',
-    a: 'خیر! دُنگ‌بان یک وب‌اپلیکیشن آفلاین (PWA) است. پس از اولین باری که سایت را باز می‌کنید، تمام بخش‌ها حتی در سفر، کوه و جنگل بدون اینترنت کار می‌کنند.'
+    q: 'آیا برای استفاده از دنگ بان به اینترنت نیاز دارم؟',
+    a: 'خیر! دنگ بان یک وب‌اپلیکیشن آفلاین (PWA) است. پس از اولین باری که سایت را باز می‌کنید، تمام بخش‌ها حتی در سفر، کوه و جنگل بدون اینترنت کار می‌کنند.'
   },
   {
     q: 'اطلاعات مالی و شماره حساب‌های من کجا ذخیره می‌شوند؟',
@@ -60,10 +60,10 @@ function toggleFaq(index) {
     <section class="guide-hero">
       <div class="max-w-2xl">
         <span class="hero__badge">راهنمای کامل و ساده</span>
-        <h1>دُنگ‌ها را ساده، عادلانه و بی‌دردسر صاف کن!</h1>
+        <h1>دنگ بان</h1>
         <p>
           سفر رفتی؟ با بچه‌ها هم‌خانه‌ای؟ مهمانی یا شام بیرون بودید؟
-          دیگر نیازی به ماشین‌حساب و دعوا سر خرده‌حساب‌ها نیست. در چند قدم ساده هزینه‌ها را وارد کن و بگذار دُنگ‌بان حساب‌ها را با کمترین تعداد جابه‌جایی پول برایت صاف کند.
+          دیگر نیازی به ماشین‌حساب و دعوا سر خرده‌حساب‌ها نیست. در چند قدم ساده هزینه‌ها را وارد کن و بگذار دنگ بان حساب‌ها را با کمترین تعداد جابه‌جایی پول برایت صاف کند.
         </p>
         <div class="hero-actions mt-6 flex flex-wrap gap-3">
           <button class="btn btn--primary btn--large" @click="showCreate = true">
@@ -83,7 +83,7 @@ function toggleFaq(index) {
           <span class="eyebrow text-primary font-bold">پیش‌نمایش محیط برنامه</span>
           <h2 class="text-2xl sm:text-3xl font-bold text-ink">طراحی مدرن، فارسی و سازگار با موبایل</h2>
           <p class="text-muted leading-relaxed text-sm sm:text-base">
-            دُنگ‌بان از پایه‌ای‌ترین لایه‌ها برای زبان فارسی و نیازهای کاربر ایرانی طراحی شده است: تقویم شمسی روان، تشخیص خودکار بانک‌ها، فونت‌های زیبای استعداد و لاله‌زار، و کارکرد بی‌نقص روی گوشی و لپ‌تاپ.
+            دنگ بان از پایه‌ای‌ترین لایه‌ها برای زبان فارسی و نیازهای کاربر ایرانی طراحی شده است: تقویم شمسی روان، تشخیص خودکار بانک‌ها، فونت‌های زیبای استعداد و لاله‌زار، و کارکرد بی‌نقص روی گوشی و لپ‌تاپ.
           </p>
           <div class="flex flex-wrap gap-2 pt-2">
             <span class="badge-feature">⚡ کاملاً آفلاین</span>
@@ -96,13 +96,13 @@ function toggleFaq(index) {
         <div class="w-full md:w-1/2 flex justify-center items-center gap-4">
           <img
             src="/screenshots/desktop-dashboard.png"
-            alt="داشبورد دنگ‌بان در دسکتاپ"
+            alt="داشبورد دنگ بان در دسکتاپ"
             class="rounded-2xl border border-line shadow-lg hidden sm:block w-7/12 hover:scale-[1.02] transition-transform duration-300"
             loading="lazy"
           />
           <img
             src="/screenshots/mobile-event.png"
-            alt="دنگ‌بان در موبایل"
+            alt="دنگ بان در موبایل"
             class="rounded-2xl border border-line shadow-lg w-44 sm:w-5/12 hover:scale-[1.02] transition-transform duration-300"
             loading="lazy"
           />
@@ -138,7 +138,7 @@ function toggleFaq(index) {
           <div class="step-content">
             <h3 class="text-xl font-bold text-ink mb-2">همسفرها و دوستان را اضافه کن</h3>
             <p class="text-muted text-sm leading-relaxed mb-4">
-              نام هر نفر را بنویسید و اضافه کنید. می‌توانید برای هر دوست شماره کارت یا شماره شبا هم وارد کنید؛ دُنگ‌بان خودکار نام و لوگوی بانک را تشخیص می‌دهد!
+              نام هر نفر را بنویسید و اضافه کنید. می‌توانید برای هر دوست شماره کارت یا شماره شبا هم وارد کنید؛ دنگبان خودکار نام و لوگوی بانک را تشخیص می‌دهد!
             </p>
             <div class="bg-surface-2 p-3 rounded-xl text-xs text-muted">
               💳 <strong>تشخیص کارت هوشمند:</strong> بانک‌های ملی، ملت، بلو، صادرات، تجارت، پاسارگاد، سامان و تمام بانک‌های شتاب پشتیبانی می‌شوند.
@@ -166,7 +166,7 @@ function toggleFaq(index) {
           <div class="step-content">
             <h3 class="text-xl font-bold text-ink mb-2">تسویهٔ هوشمند؛ کمترین جابه‌جایی پول</h3>
             <p class="text-muted text-sm leading-relaxed mb-4">
-              دُنگ‌بان با الگوریتم هوشمند، هزاران بدهی و طلب خرد را به کمترین تعداد تراکنش ممکن خلاصه می‌کند؛ یعنی به جای اینکه همه به هم پول بدهند، در ۳-۲ انتقال حساب همه صاف می‌شود!
+              دنگ بان با الگوریتم هوشمند، هزاران بدهی و طلب خرد را به کمترین تعداد تراکنش ممکن خلاصه می‌کند؛ یعنی به جای اینکه همه به هم پول بدهند، در ۳-۲ انتقال حساب همه صاف می‌شود!
             </p>
             <div class="bg-surface-2 p-3 rounded-xl text-xs text-muted">
               🚀 <strong>اشتراک‌گذاری آسان:</strong> متن خلاصه را با یک کلیک کپی کنید یا کارت تصویری شیک بسازید و در گروه تلگرام بفرستید.
@@ -182,7 +182,7 @@ function toggleFaq(index) {
         <div class="w-full lg:w-1/2">
           <img
             src="/screenshots/desktop-settlement.png"
-            alt="صفحه تسویه دنگ‌بان"
+            alt="صفحه تسویه دنگ بان"
             class="rounded-2xl border border-line shadow-md w-full hover:scale-[1.01] transition-transform duration-300"
             loading="lazy"
           />
@@ -207,7 +207,7 @@ function toggleFaq(index) {
       <div class="section-heading mb-6">
         <div>
           <span class="eyebrow">امکانات حرفه‌ای</span>
-          <h2 class="text-2xl sm:text-3xl font-bold text-ink">چرا دُنگ‌بان خاص و متمایز است؟</h2>
+          <h2 class="text-2xl sm:text-3xl font-bold text-ink">چرا دنگ بان خاص و متمایز است؟</h2>
         </div>
       </div>
 
@@ -232,7 +232,7 @@ function toggleFaq(index) {
           <span class="feature-icon">🤖</span>
           <h4 class="font-bold text-ink mb-1">سازگار با هوش مصنوعی (AI)</h4>
           <p class="text-xs text-muted leading-relaxed">
-            فرمت داده‌های دُنگ‌بان و پرامپت‌های آماده به شما اجازه می‌دهد فاکتورها را به AI بدهید تا خودکار فایل رویداد بسازد.
+            فرمت داده‌های دنگبان و پرامپت‌های آماده به شما اجازه می‌دهد فاکتورها را به AI بدهید تا خودکار فایل رویداد بسازد.
           </p>
         </div>
 

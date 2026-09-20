@@ -91,7 +91,7 @@ function clearAll() {
 
 async function checkUpdate() {
   const checked = await updates.checkForUpdate()
-  toast.show(checked ? (updates.state.needRefresh ? 'نسخهٔ جدید آمادهٔ نصب است.' : 'دنگ‌بان به‌روز است.') : 'بررسی آپدیت در نسخهٔ نصب‌شده و آنلاین فعال است.', checked ? 'success' : 'error')
+  toast.show(checked ? (updates.state.needRefresh ? 'نسخهٔ جدید آمادهٔ نصب است.' : 'دنگ بان به‌روز است.') : 'بررسی آپدیت در نسخهٔ نصب‌شده و آنلاین فعال است.', checked ? 'success' : 'error')
 }
 </script>
 
@@ -238,7 +238,7 @@ async function checkUpdate() {
     <section class="panel version-panel">
       <div>
         <span class="eyebrow">نسخه و آپدیت</span>
-        <h2>دنگ‌بان {{ appVersion }}</h2>
+        <h2>دنگ بان {{ appVersion }}</h2>
         <p>Build {{ commitSha }} · {{ buildDate }}</p>
         <small>آخرین بررسی: {{ lastChecked }}</small>
       </div>
