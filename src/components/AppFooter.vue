@@ -17,7 +17,7 @@ import { RouterLink } from 'vue-router'
       <a href="https://github.com/WhoisGray/DongBan" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-primary">
         ⭐ ستاره در GitHub
       </a>
-      <a href="https://dongban.ir" class="font-mono text-primary hover:underline">dongban.ir</a>
+      <a href="https://www.dongban.ir" class="font-mono text-primary hover:underline">dongban.ir</a>
     </nav>
   </footer>
 </template>

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /event/
 
-Sitemap: https://dongban.ir/sitemap.xml
+Sitemap: https://www.dongban.ir/sitemap.xml

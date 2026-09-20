@@ -63,7 +63,7 @@ export function buildEventTransfer(event) {
     format: EVENT_TRANSFER_FORMAT,
     schema_version: EVENT_TRANSFER_VERSION,
     exported_at: new Date().toISOString(),
-    source: 'https://dongban.ir',
+    source: 'https://www.dongban.ir',
     event: {
       title: event.title,
       date: event.date,

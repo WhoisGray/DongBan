@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "دنگ بان؛ مدیریت و تسویه هوشمند هزینه‌های گروهی (دنگبان)",
-  "homepage": "https://dongban.ir",
+  "homepage": "https://www.dongban.ir",
   "repository": {
     "type": "git",
     "url": "https://github.com/WhoisGray/DongBan.git"
