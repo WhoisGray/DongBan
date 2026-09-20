@@ -18,11 +18,32 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "دنگ بان",
-      "alternateName": ["دنگبان", "دنگ‌بان"],
-      "url": "https://www.dongban.ir/about/",
-      "description": "دنگ بان یک ابزار فارسی، آفلاین و متن‌باز برای تقسیم منصفانه هزینه‌های گروهی است."
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "دنگ بان",
+          "alternateName": ["دنگبان", "دنگ‌بان"],
+          "url": "https://www.dongban.ir/about/",
+          "description": "دنگ بان یک ابزار فارسی، آفلاین و متن‌باز برای تقسیم منصفانه هزینه‌های گروهی است."
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "صفحه اصلی دنگ بان",
+              "item": "https://www.dongban.ir/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "درباره پروژه دنگ بان",
+              "item": "https://www.dongban.ir/about/"
+            }
+          ]
+        }
+      ]
     }
     </script>
     <style>

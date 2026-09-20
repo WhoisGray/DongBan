@@ -27,34 +27,109 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "دنگ بان",
-      "alternateName": ["دنگبان", "دنگ‌بان"],
-      "description": "دنگ بان ابزار فارسی و آفلاین برای محاسبه و تسویه هوشمند هزینه‌های گروهی است. با دنگبان به سادگی خرج‌ها را مدیریت کنید.",
-      "url": "https://www.dongban.ir",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires a modern web browser with JavaScript enabled. Works completely offline after first visit.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "IRR"
-      },
-      "featureList": [
-        "محاسبه خودکار سهم هر نفر",
-        "تسویه حساب با کمترین انتقال",
-        "کاملاً آفلاین و بدون نیاز به اینترنت",
-        "پشتیبانی از ورود اطلاعات از فایل Excel",
-        "اشتراک‌گذاری نتایج",
-        "تقویم شمسی"
-      ],
-      "screenshot": "https://www.dongban.ir/icons/pwa-512x512.png",
-      "softwareVersion": "2.2.0"
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "دنگ بان",
+          "alternateName": ["دنگبان", "دنگ‌بان", "DongBan"],
+          "description": "دنگ بان ابزار فارسی، آفلاین و متن‌باز برای محاسبه دنگ و تسویه هوشمند هزینه‌های گروهی است. با دنگبان بدون نیاز به اینترنت حساب‌های سفر، مهمانی و همخانه‌ای‌ها را با کمترین کارت‌به‌کارت صاف کنید.",
+          "url": "https://www.dongban.ir",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "All",
+          "browserRequirements": "Requires a modern web browser with JavaScript enabled. Works completely offline after first visit.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "IRR"
+          },
+          "featureList": [
+            "محاسبه خودکار سهم هر نفر و تسویه با کمترین انتقال",
+            "کاملاً آفلاین و بدون نیاز به اینترنت (PWA)",
+            "تشخیص هوشمند شماره کارت و شبا با لوگوی بانک",
+            "پشتیبانی از ورود و خروجی فایل Excel و JSON",
+            "اشتراک‌گذاری تصویر فاکتور و کارت تسویه",
+            "پشتیبانی از تقویم شمسی و سهم‌های نابرابر"
+          ],
+          "screenshot": "https://www.dongban.ir/icons/pwa-512x512.png",
+          "softwareVersion": "2.5.2"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.dongban.ir/#website",
+          "url": "https://www.dongban.ir/",
+          "name": "دنگ بان",
+          "alternateName": ["دنگبان", "دنگ‌بان"],
+          "description": "دنگ بان | اپلیکیشن رایگان، آفلاین و متن‌باز محاسبه دنگ و مدیریت هزینه‌های گروهی"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://www.dongban.ir/#organization",
+          "name": "دنگ بان",
+          "url": "https://www.dongban.ir/",
+          "logo": "https://www.dongban.ir/icons/pwa-512x512.png",
+          "sameAs": [
+            "https://github.com/WhoisGray/DongBan"
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://www.dongban.ir/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "صفحه اصلی دنگ بان",
+              "item": "https://www.dongban.ir/"
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <!-- SEO Pre-rendered Content for Instant Search Engine Indexing -->
+      <header>
+        <a href="https://www.dongban.ir/">
+          <strong>دنگ بان (DongBan)</strong>
+        </a>
+      </header>
+      <main>
+        <article>
+          <h1>دنگ بان | اپلیکیشن مدیریت هزینه‌ها و محاسبه دنگ (دنگبان)</h1>
+          <p>
+            با دنگ بان به سادگی هزینه‌های گروهی را مدیریت و تسویه کنید. دنگبان ابزاری هوشمند، فارسی و آفلاین برای محاسبه دنگ سفر، مهمانی و خانه مشترک است که حساب همه را با کمترین تعداد کارت‌به‌کارت و بدون نیاز به ثبت‌نام صاف می‌کند.
+          </p>
+          <section>
+            <h2>چرا استفاده از دنگ بان پیشنهاد می‌شود؟</h2>
+            <ul>
+              <li><strong>کاملاً آفلاین و سریع:</strong> دنگبان یک وب‌اپلیکیشن PWA است که حتی بدون اینترنت در سفر و کویر کار می‌کند.</li>
+              <li><strong>حریم خصوصی و امنیت کامل:</strong> هیچ سروری اطلاعات مالی، اسامی و فاکتورهای شما را ذخیره نمی‌کند؛ داده‌ها فقط روی دستگاه خودتان می‌ماند.</li>
+              <li><strong>تشخیص هوشمند بانک:</strong> با وارد کردن شماره کارت یا شبا، لوگوی بانک‌های شتاب به همراه دکمه کپی سریع نمایش داده می‌شود.</li>
+              <li><strong>تسویه حساب با کمترین انتقال:</strong> الگوریتم هوشمند دنگ بان بدهی‌ها و طلب‌ها را تلخیص می‌کند تا با ۳-۲ کارت‌به‌کارت حساب همه صاف شود.</li>
+              <li><strong>پشتیبانی از ورود و خروجی اکسل:</strong> فایل‌های رویداد را به فرمت Excel و JSON خروجی بگیرید یا وارد کنید.</li>
+            </ul>
+          </section>
+          <section>
+            <h2>راهنمای سریع محاسبه دنگ و تقسیم خرج‌ها</h2>
+            <ol>
+              <li>یک رویداد تازه بسازید (مثل سفر شمال یا خانه مشترک).</li>
+              <li>اعضا و شماره کارت آن‌ها را اضافه کنید.</li>
+              <li>خرج‌ها را با تعیین پرداخت‌کننده و سهم‌ها ثبت کنید.</li>
+              <li>از زبانه تسویه، لیست «چه کسی به چه کسی چقدر بدهد» را دریافت کرده و کارت عکس تسویه را به اشتراک بگذارید.</li>
+            </ol>
+          </section>
+          <nav>
+            <p>لینک‌های کاربردی پروژه:</p>
+            <ul>
+              <li><a href="https://www.dongban.ir/guide/">راهنمای جامع تقسیم دنگ و تسویه حساب گروهی با دنگ بان</a></li>
+              <li><a href="https://www.dongban.ir/about/">درباره پروژه متن‌باز دنگ بان (دنگبان)</a></li>
+            </ul>
+          </nav>
+        </article>
+      </main>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
