@@ -7,6 +7,9 @@ export default createRouter({
     { path: '/event/:id', name: 'event', component: () => import('./views/EventView.vue'), props: true },
     { path: '/settings', name: 'settings', component: () => import('./views/SettingsView.vue') },
     { path: '/guide', name: 'guide', component: () => import('./views/GuideView.vue') },
+    { path: '/guide/trip-expenses', name: 'guide-trip', component: () => import('./views/GuideView.vue') },
+    { path: '/guide/roommate-bills', name: 'guide-roommate', component: () => import('./views/GuideView.vue') },
+    { path: '/guide/unequal-split', name: 'guide-unequal', component: () => import('./views/GuideView.vue') },
     { path: '/about', name: 'about', component: () => import('./views/AboutView.vue') },
     { path: '/:pathMatch(.*)*', redirect: '/' }
   ],

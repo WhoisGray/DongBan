@@ -262,6 +262,33 @@ function toggleFaq(index) {
       </div>
     </section>
 
+    <!-- Articles Hub -->
+    <section class="panel p-6 sm:p-8 rounded-3xl bg-surface border border-line">
+      <div class="section-heading mb-6">
+        <div>
+          <span class="eyebrow">مقالات تخصصی</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-ink">راهنماهای کاربردی تقسیم هزینه</h2>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="/guide/trip-expenses/" class="feature-box block hover:border-primary transition-colors">
+          <span class="feature-icon">⛺</span>
+          <h4 class="font-bold text-ink mb-1">تقسیم هزینه سفر</h4>
+          <p class="text-xs text-muted leading-relaxed">نحوه محاسبه و تسویه خرج‌های بنزین، ویلا و رستوران در تورهای گروهی.</p>
+        </a>
+        <a href="/guide/roommate-bills/" class="feature-box block hover:border-primary transition-colors">
+          <span class="feature-icon">🏡</span>
+          <h4 class="font-bold text-ink mb-1">محاسبه دنگ همخانه</h4>
+          <p class="text-xs text-muted leading-relaxed">مدیریت قبوض آب و برق، خریدهای مشترک و حساب ماهانه همخانه‌ای‌ها.</p>
+        </a>
+        <a href="/guide/unequal-split/" class="feature-box block hover:border-primary transition-colors">
+          <span class="feature-icon">⚖️</span>
+          <h4 class="font-bold text-ink mb-1">فرمول سهم نابرابر</h4>
+          <p class="text-xs text-muted leading-relaxed">آموزش محاسبات سهم‌های ضریبی، کودکان و رُندکردن تسویه حساب.</p>
+        </a>
+      </div>
+    </section>
+
     <!-- FAQ Accordion -->
     <section class="panel p-6 sm:p-8 rounded-3xl bg-surface border border-line">
       <div class="section-heading mb-6">
